@@ -1,0 +1,152 @@
+﻿<Window x:Class="vt_systems.TestWindows.WorkspaceTestWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:vt_systems.WorkspaceData"
+        mc:Ignorable="d"
+        Title="WorkspaceTestWindow" Height="800" Width="1400">
+    <Window.DataContext>
+        <local:Workspace/>
+    </Window.DataContext>
+
+    <Grid>
+        <StackPanel>
+            <StackPanel>
+
+                <DataGrid x:Name="dgWorkspaces" AutoGenerateColumns="False" IsReadOnly ="True" CanUserResizeColumns="False" CanUserResizeRows="False" MaxHeight="200" VerticalScrollBarVisibility="Auto">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Toimitila Id" Width="100" Binding="{Binding WorkspaceID}" />
+                        <DataGridTextColumn Header="Nimi" Width="100" Binding="{Binding WSName}"/>
+                        <DataGridTextColumn Header="Tiedot" Width="*" Binding="{Binding WSDescription}"/>
+                        <DataGridTextColumn Header="Hinta/h" Width="100" Binding="{Binding PriceByHour, StringFormat={}{0:N2} €}"/>
+                        <DataGridTextColumn Header="Hinta/d" Width="100" Binding="{Binding PriceByDay, StringFormat={}{0:N2} €}"/>
+                        <DataGridTextColumn Header="Hinta/w" Width="100" Binding="{Binding PriceByWeek, StringFormat={}{0:N2} €}"/>
+                        <DataGridTextColumn Header="Hinta/m" Width="100" Binding="{Binding PriceByMonth, StringFormat={}{0:N2} €}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+
+
+            <StackPanel Orientation="Horizontal">
+                <StackPanel>
+                    <StackPanel Margin="20,20,0,0" VerticalAlignment="Bottom">
+                        <TextBlock FontWeight="Bold" FontSize="16" Text="Hae toimitilan tiedot" />
+                    </StackPanel>
+
+                    <StackPanel Margin="20,20,0,0" Orientation="Horizontal">
+                        <TextBlock FontWeight="SemiBold" Margin="5" TextAlignment="Left" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Text="Toimitila ID"/>
+                        <TextBox x:Name="myWorkspaceIdBox" Margin="5" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding WorkspaceID}" VerticalAlignment="Top" Width="150"/>
+                        <Button Margin="5" Content="Hae" HorizontalAlignment="right" Width="90" Click="GetWorkspace_Click" />
+                    </StackPanel>
+
+                    <StackPanel HorizontalAlignment="Left" Margin="20,5,0,0" Orientation="Horizontal">
+                        <TextBlock FontWeight="SemiBold" Margin="5" TextAlignment="Left" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Text="Toimitilan nimi"/>
+                        <TextBox x:Name="nameBox"  Margin="5" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150"/>
+                    </StackPanel>
+
+                    <StackPanel HorizontalAlignment="Left" Margin="20,5,0,0" Orientation="Horizontal">
+                        <TextBlock FontWeight="SemiBold" Margin="5" TextAlignment="Left" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Text="Tiedot"/>
+                        <TextBox x:Name="descriptionBox"  Margin="5" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="100" Width="150"/>
+                    </StackPanel>
+
+                    <StackPanel HorizontalAlignment="Left" Margin="20,5,0,0" Orientation="Horizontal">
+                        <TextBlock FontWeight="SemiBold" Margin="5" TextAlignment="Left" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Text="Hinta/Tunti"/>
+                        <TextBox x:Name="priceHBox"  Margin="5" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150"/>
+                    </StackPanel>
+
+                    <StackPanel HorizontalAlignment="Left" Margin="20,5,0,0" Orientation="Horizontal">
+                        <TextBlock FontWeight="SemiBold" Margin="5" TextAlignment="Left" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Text="Hinta/Päivä"/>
+                        <TextBox x:Name="priceDBox"  Margin="5" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150"/>
+                    </StackPanel>
+
+                    <StackPanel HorizontalAlignment="Left" Margin="20,5,0,0" Orientation="Horizontal">
+                        <TextBlock FontWeight="SemiBold" Margin="5" TextAlignment="Left" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Text="Hinta/Viikko"/>
+                        <TextBox x:Name="priceWBox"  Margin="5" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150"/>
+                    </StackPanel>
+
+                    <StackPanel HorizontalAlignment="Left" Margin="20,5,0,0" Orientation="Horizontal">
+                        <TextBlock FontWeight="SemiBold" Margin="5" TextAlignment="Left" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Text="Hinta/Kuukausi"/>
+                        <TextBox x:Name="priceMBox"  Margin="5" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150"/>
+                    </StackPanel>
+
+                    <StackPanel Margin="0,20,0,0" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <StackPanel Orientation="Horizontal">
+                            <Button Content="Lisää" Width="90" VerticalAlignment="Top" Margin="5" Click="UpdateWorkspace_Click"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                </StackPanel>
+
+                <StackPanel>
+                    <StackPanel Orientation="Vertical" Margin="20,10,0,0">
+                        <StackPanel Margin="20,20,0,0" VerticalAlignment="Bottom">
+                            <TextBlock FontWeight="Bold" FontSize="16" Text="Lisää uusi toimitila" />
+                        </StackPanel>
+
+                        <StackPanel HorizontalAlignment="Left" Margin="20,5,0,0" Orientation="Horizontal">
+                            <TextBlock FontWeight="SemiBold" Margin="5" TextAlignment="Left" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Text="Nimi"/>
+                            <TextBox x:Name="txtName"  Margin="5" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150" />
+                        </StackPanel>
+
+                        <StackPanel HorizontalAlignment="Left" Margin="20,5,0,0" Orientation="Horizontal">
+                            <TextBlock FontWeight="SemiBold" Margin="5" TextAlignment="Left" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Text="Tietoja"/>
+                            <TextBox x:Name="txtDescription"  Margin="5" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150" Height="100"/>
+                        </StackPanel>
+
+                        <StackPanel HorizontalAlignment="Left" Margin="20,5,0,0" Orientation="Horizontal">
+                            <TextBlock FontWeight="SemiBold" Margin="5" TextAlignment="Left" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Text="Hinta/Tunti"/>
+                            <TextBox x:Name="txtPriceH"  Margin="5" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150"/>
+                        </StackPanel>
+
+                        <StackPanel HorizontalAlignment="Left" Margin="20,5,0,0" Orientation="Horizontal">
+                            <TextBlock FontWeight="SemiBold" Margin="5" TextAlignment="Left" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Text="Hinta/Päivä"/>
+                            <TextBox x:Name="txtPriceD" Margin="5" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150"/>
+                        </StackPanel>
+
+                        <StackPanel HorizontalAlignment="Left" Margin="20,5,0,0" Orientation="Horizontal">
+                            <TextBlock FontWeight="SemiBold" Margin="5" TextAlignment="Left" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Text="Hinta/Viikko"/>
+                            <TextBox x:Name="txtPriceW"  Margin="5" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150"/>
+                        </StackPanel>
+
+                        <StackPanel HorizontalAlignment="Left" Margin="20,5,0,0" Orientation="Horizontal">
+                            <TextBlock FontWeight="SemiBold" Margin="5" TextAlignment="Left" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Text="Hinta/Kuukausi"/>
+                            <TextBox x:Name="txtPriceM"  Margin="5" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150"/>
+                        </StackPanel>
+
+
+                        <StackPanel HorizontalAlignment="Left" Margin="20,5,0,0" Orientation="Horizontal">
+                            <TextBlock FontWeight="SemiBold" Margin="5" TextAlignment="Left" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Text="Toimipiste"/>
+                            <ComboBox x:Name="cmbOffices" Margin="5" Width="150" DisplayMemberPath="City"/>
+                        </StackPanel>
+
+                    </StackPanel>
+
+                    <StackPanel Margin="0,20,0,0" VerticalAlignment="Center" HorizontalAlignment="Right">
+                        <StackPanel Orientation="Horizontal">
+                            <Button Content="Lisää" Width="90" VerticalAlignment="Top" Margin="5" Click="AddNewWorkspace_Click"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical" Margin="0,20,0,0">
+                    <StackPanel Margin="20,20,0,0" VerticalAlignment="Bottom">
+                        <TextBlock FontWeight="Bold" FontSize="16" Text="Poista toimitila" />
+                    </StackPanel>
+
+                    <StackPanel HorizontalAlignment="left" Margin="20,20,0,0" Orientation="Horizontal">
+                        <TextBlock FontWeight="SemiBold" TextAlignment="Left" Margin="5" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Text="Toimipiste ID"/>
+                        <TextBox x:Name="deleteWorkspaceIdBox" HorizontalAlignment="Left" Margin="5" TextWrapping="Wrap" Text="{Binding WorkspaceID}" VerticalAlignment="Top" Width="150"/>
+                    </StackPanel>
+
+                    <StackPanel Margin="0,20,0,0" VerticalAlignment="Center" HorizontalAlignment="Right">
+                        <StackPanel Orientation="Vertical">
+                            <Button Content="Poista" Width="90" VerticalAlignment="Top" Margin="5" Click="DeleteWorkspace_Click"/>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,49 @@
+﻿<Window x:Class="vt_systems.TestWindows.ReportWorkspacesTestWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:vt_systems.ReportData"
+        mc:Ignorable="d"
+        Title="ReportWorkspacesTestWindow" Height="450" Width="800">
+
+    <Window.DataContext>
+        <local:Report></local:Report>
+    </Window.DataContext>
+
+    <Grid>
+
+        <StackPanel>
+            <StackPanel Margin="20,20,0,0" VerticalAlignment="Bottom">
+                <TextBlock FontWeight="Bold" FontSize="16" Text="Luo raportti" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <StackPanel HorizontalAlignment="Left" Margin="20,5,0,0" Orientation="Horizontal">
+                    <TextBlock FontWeight="SemiBold" Margin="5" TextAlignment="Left" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Text="Toimipiste"/>
+                    <ComboBox x:Name="cmbOffice" Width="150" DisplayMemberPath="City" />
+                </StackPanel>
+
+
+
+            </StackPanel>
+
+            <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+                <StackPanel HorizontalAlignment="Left" Margin="20,5,0,0" Orientation="Horizontal">
+                    <TextBlock FontWeight="SemiBold" Margin="5" TextAlignment="Left" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Text="Alkaa"/>
+                    <DatePicker x:Name="calStart" Width="150"/>
+                </StackPanel>
+
+                <StackPanel HorizontalAlignment="Left" Margin="20,5,0,0" Orientation="Horizontal">
+                    <TextBlock FontWeight="SemiBold" Margin="5" TextAlignment="Left" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Text="Loppuu"/>
+                    <DatePicker x:Name="calEnd" Width="150"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Right" Margin="20,20,15,0" Orientation="Horizontal">
+                <Button x:Name="btnWorkspace" Content="Toimitila raportti" Margin="5" Width="120" Height="20" Click="btnWorkspaces_Click"/>
+                <Button x:Name="btnSerDev" Content="Lisäpalvelut raportti" Margin="5" Width="120" Height="20"  Click="btnSerDev_Click"/>
+                
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

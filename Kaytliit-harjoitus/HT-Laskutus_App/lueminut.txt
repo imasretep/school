@@ -1,0 +1,1 @@
+ConnectionString asetukset löytyvät InvoiceAppRepo.cs riviltä 13 ja 14.

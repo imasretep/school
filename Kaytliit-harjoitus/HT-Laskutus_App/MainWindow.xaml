@@ -1,0 +1,111 @@
+﻿<Window x:Class="HT_Laskutus_App.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HT_Laskutus_App"
+        mc:Ignorable="d"
+        Background="Transparent"
+        AllowsTransparency="True"
+        WindowStyle="None"
+        Title="Laskutus App" Height="460" Width="810" ResizeMode="NoResize">
+
+    <Border BorderBrush="Black" BorderThickness="1" CornerRadius="0" Background="White" Margin="0,0,10,10">
+        <Border.Effect>
+            <DropShadowEffect ShadowDepth="10" Direction="300" Opacity="0.2" />
+        </Border.Effect>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <!--YLÄPALKKI-->
+            <Grid Grid.Row="0" x:Name="MyWindowHeader" 
+              MouseLeftButtonDown="MoveWindow_MouseLeftButtonDown" 
+              Background="#0353A4">
+                <Label HorizontalAlignment="Center" 
+                Content="Rakennus Oy Laskutus"
+                FontSize="16"
+                Foreground="White"/>
+                <Rectangle x:Name="rctClose" Fill="DarkRed"
+                Width="20"           
+                HorizontalAlignment="Left" 
+                Margin="760,10,0,10"
+                MouseEnter="rctClose_MouseEnter"
+                MouseLeave="rctClose_MouseLeave"
+                MouseLeftButtonDown="rctClose_MouseLeftButtonDown"/>
+                <Rectangle x:Name="rctMinimize" Fill="DarkGoldenrod"
+                Width="20"
+                HorizontalAlignment="Left" 
+                Margin="720,10,0,10"
+                MouseEnter="rctMinimize_MouseEnter"
+                MouseLeave="rctMinimize_MouseLeave"
+                MouseLeftButtonDown="rctMinimize_MouseLeftButtonDown"/>
+            </Grid>
+
+            <TabControl Margin="0,5,0,0" Grid.Row="1">
+                <!--LASKUT-->
+                <TabItem Header="Laskut">
+                    <Grid>
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="794">
+                            <Button Content="Luo uusi lasku..."  Margin="5" Width="250" Click="AddNewInvoiceButton_Click"/>
+                            <Button Content="Hae kaikki laskut..."  Margin="5" Width="250" Click="AllInvoicesButton_Click"/>
+                            <Button Content="Poista lasku..." Margin="5"  Width="250" Click="DeleteInvoiceButton_Click"/>
+                        </StackPanel>
+                    </Grid>
+                </TabItem>
+
+                <!--TUOTTEET-->
+                <TabItem Header="Tuotteet">
+                    <Grid>
+                        <StackPanel>
+                            <DataGrid x:Name="myDataGrid" AutoGenerateColumns="False" IsReadOnly ="True" CanUserResizeColumns="False" CanUserResizeRows="False">
+                                <!--Otsikot ja Data Bindings-->
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Tuote ID" Width="100" Binding="{Binding Number}" />
+                                    <DataGridTextColumn Header="Nimi" Width="350" Binding="{Binding Name}"/>
+                                    <DataGridTextColumn Header="Hinta" Width="100" Binding="{Binding Price}"/>
+                                    <DataGridTextColumn Header="Yksikkö" Width="100" Binding="{Binding Unit}"/>
+                                    <DataGridTextColumn Header="Varastossa" Width="*" Binding="{Binding Amount}"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            <!--NAPPULAT-->
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                <Button Content="Lisää..."  Margin="5" Click="AddNewProduct_Click" Width="250"/>
+                                <Button Content="Muokkaa..." Margin="5" Click="UpdateProduct_Click" Width="250"/>
+                                <Button Content="Poista..." Margin="5" Click="DeleteButton_Click" Width="250"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </TabItem>
+
+                <!--ASIAKKAAT-->
+                <TabItem Header="Asiakkaat">
+                    <Grid>
+                        <StackPanel>
+                            <DataGrid x:Name="myCustomerGrid" AutoGenerateColumns="False" IsReadOnly ="True" CanUserResizeColumns="False" CanUserResizeRows="False">
+                                <!--Otsikot ja Data Bindings-->
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Asiakas ID" Width="100" Binding="{Binding CustomerId}" />
+                                    <DataGridTextColumn Header="Etunimi" Width="100" Binding="{Binding FirstName}"/>
+                                    <DataGridTextColumn Header="Sukunimi" Width="100" Binding="{Binding LastName}"/>
+                                    <DataGridTextColumn Header="Puhelin" Width="100" Binding="{Binding Phone}"/>
+                                    <DataGridTextColumn Header="Osoite" Width="120" Binding="{Binding Address}"/>
+                                    <DataGridTextColumn Header="Postinumero" Width="120" Binding="{Binding Postal}"/>
+                                    <DataGridTextColumn Header="Kaupunki" Width="*" Binding="{Binding City}"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            <!--NAPPULAT-->
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                <Button Content="Lisää..."  Margin="5" Width="250" Click="AddNewCustomer_Click"/>
+                                <Button Content="Muokkaa..." Margin="5" Width="250" Click="UpdateCustomer_Click"/>
+                                <Button Content="Poista..." Margin="5" Width="250" Click="DeleteCustomer_Click"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </Grid>
+    </Border>
+</Window>
